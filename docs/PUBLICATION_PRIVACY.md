@@ -2,11 +2,11 @@
 
 This repository is prepared from the final FireGuard 3.7 snapshot source without changing the private working deployment.
 
-Excluded: provisioning files, Wi-Fi/bot/provider credentials, live deployment identifiers, private upload/boot/runtime logs, captured household images, original Telegram/email screenshots, machine-specific debug binaries and historical handoff notes. Notebook execution outputs are cleared. Existing private final ZIPs are not uploaded.
+Excluded: provisioning files, Wi-Fi/bot/provider credentials, live deployment identifiers, private upload/boot/runtime logs, unredacted household/media attachments, original Telegram/email screenshots, machine-specific debug binaries and historical handoff notes. Notebook execution outputs are cleared. Existing private final ZIPs are not uploaded.
 
 The dashboard screenshots were rendered locally from the actual web UI using invented data and an explicit demo label. Personal addresses, contact fields, map coordinates, credentials and join codes are not loaded. Screenshot controls cannot send messages in the preview.
 
-The Telegram image is an AI-edited redacted illustration. Solid opaque masks hide personal names, addresses, landmarks, phone numbers and event/account identifiers. It is not an unaltered screenshot. The unrelated email screenshots and personal camera scene are excluded.
+The detailed Telegram alert and phone notification are AI-edited privacy-redacted illustrations. Solid opaque masks hide personal names, addresses, landmarks, phone numbers and event/account identifiers. The camera-snapshot message uses deterministic opaque text masks; its original camera photograph, including the person, is preserved unchanged at the user's explicit request. Unrelated email screenshots and unredacted source attachments are excluded.
 
 The hardware image is an exact 90-degree clockwise pixel rotation of the original, with no AI redrawing. The original attachments remain private. Published images contain no original EXIF location metadata.
 

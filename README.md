@@ -23,15 +23,25 @@ An ESP32-S3 fire and gas activity monitoring prototype with local CNN inference,
 
 ## Screenshots and hardware
 
-Dashboard views below use **synthetic demo data**, not private live household telemetry. The Telegram example is an **AI-edited privacy-redacted illustration of a supplied capture**; consult source code and test records for exact behaviour. The hardware photograph is the original rotated exactly 90 degrees clockwise, with metadata removed.
+Dashboard views below use **synthetic demo data**, not private live household telemetry. The hardware photograph is the original rotated exactly 90 degrees clockwise, with metadata removed.
 
 | Desktop alert state (demo) | Mobile dashboard (demo) |
 | --- | --- |
 | ![Alert dashboard](docs/images/dashboard-alert-demo.jpg) | <img src="docs/images/dashboard-mobile-demo.jpg" alt="Mobile dashboard" width="270"> |
 
-| Assembled hardware | Redacted Telegram alert |
-| --- | --- |
-| ![FireGuard hardware rotated clockwise](docs/images/hardware-clockwise.png) | <img src="docs/images/telegram-alert-redacted.png" alt="Telegram alert with personal details hidden" width="300"> |
+### Assembled hardware
+
+![FireGuard hardware rotated clockwise](docs/images/hardware-clockwise.png)
+
+## Redacted Telegram alerts
+
+Three examples from the supplied project captures: the detailed alert, a phone notification, and the camera snapshot delivered in Telegram. Personal names, addresses, landmarks, phone numbers and account/event identifiers are hidden. The **camera photograph, including the person, is unchanged**, as requested.
+
+| Detailed Telegram alert | Phone notification | Camera snapshot message |
+| --- | --- | --- |
+| <img src="docs/images/telegram-alert-redacted.png" alt="Detailed Telegram alert with personal values hidden" width="290"> | <img src="docs/images/telegram-phone-notification-redacted.png" alt="Phone notification with personal values hidden" width="290"> | <img src="docs/images/telegram-camera-snapshot-redacted.png" alt="Telegram camera snapshot; original photo preserved and personal text hidden" width="290"> |
+
+The detailed alert and phone-notification examples are **AI-edited privacy-redacted illustrations**; they are not unaltered captures. The snapshot example uses opaque text masks and preserves the original camera-photo pixels. See [image preparation notes](docs/images/README.md). These examples illustrate delivery and interface behaviour, not detection-accuracy benchmarks.
 
 ## Documentation
 
