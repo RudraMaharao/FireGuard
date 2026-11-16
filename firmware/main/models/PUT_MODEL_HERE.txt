@@ -1,0 +1,5 @@
+Copy the model made by the training project here and rename it:
+
+  fire_yolo_esp32s3/export/fire_det_s8_esp32s3.espdl  ->  main/models/fire_det.espdl
+
+The build stops with a clear message until this file exists.

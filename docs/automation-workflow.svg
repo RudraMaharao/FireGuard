@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1930" viewBox="0 0 1500 1930">
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#59796f"/></marker></defs>
+<rect width="1500" height="1930" fill="#f5f8f5"/>
+<style>text{font-family:Arial,sans-serif;fill:#203e35}.t{font-weight:700;font-size:29px}.h{font-weight:700;font-size:19px}.b{font-size:16px}.small{font-size:14px;fill:#597168}</style>
+<text x="55" y="55" class="t">FireGuard - full automation workflow</text>
+<text x="55" y="87" class="b">Local decisions continue with power; remote delivery and cloud sync require internet.</text>
+<rect x="40" y="120" width="440" height="44" rx="8" fill="#dfeee2"/>
+<text x="56" y="149" class="h">01  SETUP &amp; SENSING</text>
+<rect x="530" y="120" width="440" height="44" rx="8" fill="#dfeee2"/>
+<text x="546" y="149" class="h">02  LOCAL AI &amp; RESPONSE</text>
+<rect x="1020" y="120" width="440" height="44" rx="8" fill="#dfeee2"/>
+<text x="1036" y="149" class="h">03  CLOUD &amp; USER CONTROL</text>
+<rect x="40" y="190" width="440" height="100" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="220" class="h">Boot and initialize</text>
+<text x="58" y="249" class="b">Load NVS; start ESP-IDF / FreeRTOS tasks.</text>
+<text x="58" y="272" class="b">Initialize ADS1115, BME280 and CNN.</text>
+<rect x="40" y="330" width="440" height="138" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="360" class="h">Local setup when requested</text>
+<text x="58" y="389" class="b">Hotspot + local web page; configure Wi-Fi.</text>
+<text x="58" y="412" class="b">Register residents with Telegram bot.</text>
+<text x="58" y="435" class="b">Save address, location and optional SMS.</text>
+<text x="58" y="458" class="b">Credentials remain local to deployment.</text>
+<rect x="40" y="510" width="440" height="105" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="540" class="h">Persist and connect</text>
+<text x="58" y="569" class="b">Commit settings to dedicated NVS storage.</text>
+<text x="58" y="592" class="b">Apply Wi-Fi after the save sequence.</text>
+<rect x="40" y="660" width="440" height="100" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="690" class="h">Warm-up: 300 seconds</text>
+<text x="58" y="719" class="b">Health checks and baseline tracking.</text>
+<text x="58" y="742" class="b">MQ values are relative activity, not ppm.</text>
+<rect x="40" y="810" width="440" height="120" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="840" class="h">Acquire inputs</text>
+<text x="58" y="869" class="b">MQ-2 AO -&gt; divider/filter -&gt; ADS1115 A0.</text>
+<text x="58" y="892" class="b">MQ-135 AO -&gt; divider/filter -&gt; A2.</text>
+<text x="58" y="915" class="b">BME280: temperature, humidity, pressure.</text>
+<rect x="40" y="980" width="440" height="120" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="1010" class="h">Validate and prepare evidence</text>
+<text x="58" y="1039" class="b">Check sensor validity; calculate deviations.</text>
+<text x="58" y="1062" class="b">Track thermal / humidity context.</text>
+<text x="58" y="1085" class="b">CO channel is disabled: MQ-7 removed.</text>
+<polyline points="260,290 260,330" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="260,468 260,510" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="260,615 260,660" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="260,760 260,810" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="260,930 260,980" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="480,1040 515,1040 515,618 530,618" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="434" y="965" class="small">Evidence</text>
+<rect x="530" y="190" width="440" height="137" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="548" y="220" class="h">Camera demand</text>
+<text x="548" y="249" class="b">Triggered by sensor concern or a request.</text>
+<text x="548" y="272" class="b">Capture 320 x 240 JPEG in PSRAM.</text>
+<text x="548" y="295" class="b">Release camera buffer; decode RGB565.</text>
+<text x="548" y="318" class="b">Run local CNN + classical image analysis.</text>
+<rect x="530" y="380" width="440" height="120" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="548" y="410" class="h">Visual evidence</text>
+<text x="548" y="439" class="b">Classes: fire and smoke; map detections.</text>
+<text x="548" y="462" class="b">Use confidence and box/scene context.</text>
+<text x="548" y="485" class="b">Keep fresh JPEG for dashboard / alerts.</text>
+<rect x="530" y="550" width="440" height="135" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="548" y="580" class="h">Temporal sensor fusion</text>
+<text x="548" y="609" class="b">Median -&gt; fast attack / slow release.</text>
+<text x="548" y="632" class="b">Persistence + confidence / freshness.</text>
+<text x="548" y="655" class="b">Noisy-OR + corroboration + context floor.</text>
+<text x="548" y="678" class="b">Invalid inputs lose confidence.</text>
+<rect x="530" y="735" width="440" height="125" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="548" y="765" class="h">Risk scores and state machine</text>
+<text x="548" y="794" class="b">Fire risk + gas activity, each 0-100.</text>
+<text x="548" y="817" class="b">Thresholds, entry dwell and hysteresis.</text>
+<text x="548" y="840" class="b">Normal / warning / hazard / recovery / fault.</text>
+<rect x="530" y="980" width="440" height="125" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="548" y="1010" class="h">Hazard response</text>
+<text x="548" y="1039" class="b">Open an event; activate local buzzer.</text>
+<text x="548" y="1062" class="b">Queue Telegram resident text + fresh photo.</text>
+<text x="548" y="1085" class="b">Optional textbee SMS is text only.</text>
+<rect x="530" y="1155" width="440" height="165" rx="13" fill="#fff2e5" stroke="#cddfd3"/>
+<text x="548" y="1185" class="h">Emergency forwarding gate</text>
+<text x="548" y="1214" class="b">Master switch AND configured recipient.</text>
+<text x="548" y="1237" class="b">Forward for fresh high-confidence flame,</text>
+<text x="548" y="1260" class="b">or warning unacknowledged at timeout.</text>
+<text x="548" y="1283" class="b">Default timeout: 60 s; configurable.</text>
+<text x="548" y="1306" class="b">Acknowledgement stops unattended branch.</text>
+<rect x="530" y="1370" width="440" height="125" rx="13" fill="#fff2e5" stroke="#cddfd3"/>
+<text x="548" y="1400" class="h">Forward configured evidence</text>
+<text x="548" y="1429" class="b">Joined emergency Telegram recipient.</text>
+<text x="548" y="1452" class="b">Optional station/test number via textbee.</text>
+<text x="548" y="1475" class="b">Include saved address / usable location.</text>
+<rect x="530" y="1555" width="440" height="115" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="548" y="1585" class="h">Continue monitoring / recovery</text>
+<text x="548" y="1614" class="b">Use hysteresis and recovery dwell.</text>
+<text x="548" y="1637" class="b">Event / repeat limits bound notifications.</text>
+<text x="548" y="1660" class="b">No automatic phone call or dispatch.</text>
+<polyline points="750,327 750,380" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="750,500 750,550" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="750,685 750,735" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="750,1105 750,1155" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="750,1320 750,1370" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="750,1495 750,1555" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="750,860 750,980" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="765" y="913" class="small">Warning / hazard</text>
+<polyline points="530,800 505,800 505,1610 530,1610" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="445" y="1210" class="small">Normal</text>
+<polyline points="750,1670 750,1730 15,1730 15,870 40,870" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="35" y="1714" class="small">Repeat sensing</text>
+<polyline points="480,1040 505,1040 505,248 530,248" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="355" y="234" class="small">Camera concern</text>
+<rect x="1020" y="190" width="440" height="117" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="220" class="h">Authenticated device sync</text>
+<text x="1038" y="249" class="b">Every 5 s -&gt; HTTPS Lambda Function URL.</text>
+<text x="1038" y="272" class="b">Device key authenticates telemetry.</text>
+<text x="1038" y="295" class="b">Latest available JPEG uploaded separately.</text>
+<rect x="1020" y="355" width="440" height="127" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="385" class="h">AWS persistence</text>
+<text x="1038" y="414" class="b">DynamoDB: latest state + pending commands.</text>
+<text x="1038" y="437" class="b">Private S3: latest available image.</text>
+<text x="1038" y="460" class="b">This deployment is not a full sensor</text>
+<text x="1038" y="483" class="b">history / post-analysis data warehouse.</text>
+<rect x="1020" y="535" width="440" height="120" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="565" class="h">Remote dashboard</text>
+<text x="1038" y="594" class="b">Separate dashboard access key.</text>
+<text x="1038" y="617" class="b">View risk, sensor health and latest image.</text>
+<text x="1038" y="640" class="b">Desktop and mobile layouts.</text>
+<rect x="1020" y="710" width="440" height="140" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="740" class="h">Command queue</text>
+<text x="1038" y="769" class="b">Request readings / capture / acknowledge.</text>
+<text x="1038" y="792" class="b">Queue permitted home-setting changes.</text>
+<text x="1038" y="815" class="b">ESP32 validates and reports result.</text>
+<text x="1038" y="838" class="b">Secrets are configured via local setup.</text>
+<rect x="1020" y="910" width="440" height="120" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="940" class="h">Optional AWS SNS SMS</text>
+<text x="1038" y="969" class="b">Independent resident SMS path.</text>
+<text x="1038" y="992" class="b">Requires deployment/provider configuration.</text>
+<text x="1038" y="1015" class="b">Acceptance is not handset delivery proof.</text>
+<rect x="1020" y="1090" width="440" height="145" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="1120" class="h">Local user controls</text>
+<text x="1038" y="1149" class="b">Local dashboard + physical buttons.</text>
+<text x="1038" y="1172" class="b">Readings, snapshot, acknowledgement, setup.</text>
+<text x="1038" y="1195" class="b">Manual capture requests fresh evidence.</text>
+<text x="1038" y="1218" class="b">Capture failures / stale state are reported.</text>
+<rect x="1020" y="1290" width="440" height="165" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="1038" y="1320" class="h">Location and privacy</text>
+<text x="1038" y="1349" class="b">Saved installation coordinates take priority.</text>
+<text x="1038" y="1372" class="b">Optional Wi-Fi estimate is fallback/check.</text>
+<text x="1038" y="1395" class="b">No GPS module required.</text>
+<text x="1038" y="1418" class="b">Use configured test numbers during testing.</text>
+<text x="1038" y="1441" class="b">Public images contain no private values.</text>
+<polyline points="1240,307 1240,355" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="1240,482 1240,535" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="1240,655 1240,710" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="1020,780 995,780 995,248 1020,248" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="1005" y="327" class="small">Next device sync</text>
+<polyline points="970,797 995,797 995,248 1020,248" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<polyline points="1020,1160 995,1160 995,248 970,248" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="1025" y="1065" class="small">Manual request</text>
+<polyline points="1240,850 1240,910" fill="none" stroke="#59796f" stroke-width="2" marker-end="url(#a)"/>
+<text x="1250" y="887" class="small">Separate optional path</text>
+<rect x="40" y="1170" width="440" height="160" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="1200" class="h">Fault / offline behaviour</text>
+<text x="58" y="1229" class="b">Local sensing and buzzer need power.</text>
+<text x="58" y="1252" class="b">Internet loss interrupts remote services.</text>
+<text x="58" y="1275" class="b">Stale dashboard values remain labelled.</text>
+<text x="58" y="1298" class="b">Missing / stale sensor evidence is not</text>
+<text x="58" y="1321" class="b">treated as valid hazard-free evidence.</text>
+<rect x="40" y="1380" width="440" height="145" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="1410" class="h">Evidence and limits</text>
+<text x="58" y="1439" class="b">Prototype scores require field validation.</text>
+<text x="58" y="1462" class="b">User demonstrated Telegram messages</text>
+<text x="58" y="1485" class="b">and a camera snapshot in supplied captures.</text>
+<text x="58" y="1508" class="b">Those are not accuracy benchmarks.</text>
+<rect x="40" y="1810" width="1420" height="85" rx="13" fill="#ffffff" stroke="#cddfd3"/>
+<text x="58" y="1840" class="h">Reading this map</text>
+<text x="58" y="1869" class="b">Arrows show process and data flow. Cloud work runs alongside local sensing; it is not a prerequisite for local detection.</text>
+<text x="58" y="1892" class="b">Emergency forwarding is optional; recipient registration, internet and provider configuration are required.</text>
+</svg>

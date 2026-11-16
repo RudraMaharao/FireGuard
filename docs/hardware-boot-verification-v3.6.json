@@ -1,0 +1,26 @@
+{
+  "version": "3.6-clock-init",
+  "verifiedOn": "2026-11-02",
+  "flashWriteCompleted": true,
+  "onBoardBootVerified": true,
+  "captureSeconds": 40,
+  "applicationStartsObserved": 1,
+  "bootErrorObserved": false,
+  "sensorUpdates": 79,
+  "lastSensorMs": 39179,
+  "clockInitObserved": true,
+  "modelLoaded": true,
+  "wifiIpEventObserved": true,
+  "allocationWarnings": [
+    "FireGuard allocation failed: bytes=180 caps=0x80c caller=heap_caps_malloc",
+    "FireGuard allocation failed: bytes=180 caps=0x80c caller=heap_caps_malloc"
+  ],
+  "memoryDiagnostics": [
+    "I (883) memory: libc clock initialized before application workers",
+    "I (933) memory: before Wi-Fi: internal free 200607, largest 147456; PSRAM free 8375736",
+    "I (973) memory: after radio start: internal free 165475, largest 131072",
+    "I (993) memory: all workers started: internal free 48503, largest 31744; PSRAM free 8046668",
+    "I (30893) memory: running: internal free 57763, largest 29696; PSRAM free 6651692; main stack spare 14888"
+  ],
+  "scope": "Healthy 40-second startup capture with sensor sampling, network address and model load. Two nonfatal allocation warnings during startup remain recorded; this does not verify long-term memory behavior, physical hazard response, Telegram delivery or settings restart retention."
+}

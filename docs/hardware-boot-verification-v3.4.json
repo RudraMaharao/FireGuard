@@ -1,0 +1,20 @@
+{
+  "flashWriteCompleted": true,
+  "bootErrorObserved": false,
+  "bootCaptureBytes": 28386,
+  "memoryDiagnostics": [
+    "I (923) memory: before Wi-Fi: internal free 201771, largest 147456; PSRAM free 8377120",
+    "I (1013) memory: after radio start: internal free 162171, largest 126976",
+    "I (1023) memory: all workers started: internal free 54995, largest 31744; PSRAM free 8045416",
+    "I (30893) memory: running: internal free 60723, largest 31744; PSRAM free 6652556; main stack spare 7016"
+  ],
+  "expectedVersion": "3.4-save-flow",
+  "observedVersions": [
+    "3.4-save-flow"
+  ],
+  "observedExpectedVersion": true,
+  "verifiedOn": "2026-11-02",
+  "scope": "Successful 3.4 upload and 40-second boot capture; user subsequently saw NVS write failed on Save. Save persistence did not pass.",
+  "saveFlowOnBoardVerified": false,
+  "userReportedSaveError": "NVS write failed"
+}

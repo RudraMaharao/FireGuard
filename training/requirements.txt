@@ -1,0 +1,7 @@
+# Training (steps 0-3, 6-7) and the PC helper scripts. Works on Python 3.10 - 3.13.
+# Steps 4-5 (export + int8 for the ESP32) need Python <= 3.12: see requirements-export.txt.
+# Tested versions (Oct 2026). Newer versions may change internals these scripts rely on.
+ultralytics==8.4.160
+torch-pruning==1.6.1
+construct               # reading the fire cam's flash storage (pull_field_data.py)
+esptool

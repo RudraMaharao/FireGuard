@@ -1,0 +1,54 @@
+# Full automation workflow
+
+![Automation workflow](automation-workflow.svg)
+
+## Editable flow
+
+```mermaid
+flowchart TD
+  Boot([Power on / reset]) --> Init[Load NVS settings; initialize sensors, camera model and tasks]
+  Init --> Setup{Setup requested or Wi-Fi not configured?}
+  Setup -->|Yes| AP[FireGuard-Setup hotspot + local setup page]
+  AP --> Config[Save Wi-Fi, resident addresses, Telegram and optional SMS/location settings]
+  Config --> NVS[Persist settings; apply Wi-Fi after saves]
+  Setup -->|No| Warm
+  NVS --> Warm[300-second warm-up; sensor health and baseline tracking]
+  Warm --> Read[MQ-2 + MQ-135 AO via dividers and ADS1115; BME280 readings]
+  Read --> Validate[Check validity; relative MQ activity; temperature and humidity trends]
+  Validate --> Demand{Sensor concern or manual capture?}
+  Demand -->|Yes| Cam[Capture JPEG; decode RGB565; CNN fire/smoke + classical features]
+  Demand -->|No| Fusion
+  Cam --> Fusion[Freshness and confidence weights; median, smoothing and persistence; fusion]
+  Fusion --> State[Fire/gas scores; thresholds, dwell, hysteresis and fault states]
+  State -->|Normal or recovering| Read
+  State -->|Warning / hazard| Event[Open event; local buzzer; queue resident alert]
+  Event --> Notify[Telegram text + fresh photo when available; optional textbee resident SMS]
+  Event --> Gate{Emergency forwarding enabled and recipient configured?}
+  Gate -->|No| Read
+  Gate -->|Yes| High{Fresh high-confidence flame?}
+  High -->|Yes| Forward[Queue emergency Telegram; optional station textbee SMS; attach location]
+  High -->|No| Ack{Acknowledged before configured timeout?}
+  Ack -->|Yes| Read
+  Ack -->|No| Forward
+  Forward --> Read
+  State -.-> Sync[Every 5 seconds: authenticated device sync to Lambda]
+  Sync --> DB[(DynamoDB: latest state and pending commands)]
+  Sync --> S3[(Private S3: latest available JPEG)]
+  DB --> Dash[Authenticated AWS browser dashboard]
+  S3 --> Dash
+  Dash --> Cmd[Queue readings, capture, acknowledgement or settings command]
+  Cmd --> Sync
+  Sync --> Apply[Device validates and applies command; reports result]
+  Apply --> Read
+  Cmd -.-> SNS[Optional independent AWS SNS resident SMS]
+  Manual[Local dashboard / buttons: readings, capture, acknowledge, setup] --> Apply
+```
+
+## Rules that matter
+
+- The two MQ channels are overlapping baseline-relative indicators; there is no CO measurement.
+- Local inference and the buzzer do not depend on AWS. Remote delivery needs connectivity.
+- Fresh high-confidence flame can forward even after acknowledgement; acknowledgement gates only unattended forwarding.
+- Emergency forwarding requires the master switch and an eligible configured recipient.
+- Telegram photos and text-only SMS are separate transports. No automatic calls are made.
+- AWS retains the latest device snapshot/image and pending commands, not continuous sensor history.

@@ -1,0 +1,44 @@
+{
+  "version": "3.7-snapshot",
+  "verifiedOn": "2026-11-02",
+  "flashWriteCompleted": true,
+  "onBoardBootVerified": true,
+  "captureSeconds": 40,
+  "applicationStartsObserved": 1,
+  "sensorUpdates": 79,
+  "lastSensorMs": 39179,
+  "bootErrorObserved": false,
+  "cameraDetected": "OV5640 PID 0x5640, SCCB address 0x3c",
+  "cameraDmaBytes": 16384,
+  "frameBufferInPsram": true,
+  "memoryDiagnostics": [
+    "I (884) memory: libc clock initialized before application workers",
+    "I (924) memory: before Wi-Fi: internal free 200443, largest 147456; PSRAM free 8375736",
+    "I (974) memory: after radio start: internal free 165319, largest 131072",
+    "I (994) memory: all workers started: internal free 48091, largest 31744; PSRAM free 8046664",
+    "I (30894) memory: running: internal free 49755, largest 29696; PSRAM free 6596300; main stack spare 14888"
+  ],
+  "allocationWarnings": [
+    "FireGuard allocation failed: bytes=180 caps=0x80c caller=heap_caps_malloc",
+    "FireGuard allocation failed: bytes=180 caps=0x80c caller=heap_caps_malloc"
+  ],
+  "laterLiveChecks": {
+    "softwareRevision": "hybrid-location-v3.7-snapshot",
+    "cloudLastStatus": 200,
+    "cloudLastError": 0,
+    "cameraReady": true,
+    "cameraImageAtIncreasing": true,
+    "cameraError": "",
+    "awsPhotoHttp": 200,
+    "jpegBytes": 3297,
+    "jpegDimensions": [
+      320,
+      240
+    ],
+    "photoDisplayedInChrome": true,
+    "imageQuality": "green/blurred; normal scene not verified",
+    "telegramPhotoDeliveryVerified": false
+  },
+  "buttonObservation": "All three long-press actions fire at startup while user reports no buttons pressed. Input wiring/levels require isolation. User instructed to power off and disconnect only signal wires GPIO14/47/21 temporarily; not yet confirmed completed.",
+  "scope": "Real capture/decode/inference/cache/AWS JPEG retrieval and browser display are verified. Usable image quality, intentional manual request delivery to Telegram, button operation and sustained stability remain pending."
+}

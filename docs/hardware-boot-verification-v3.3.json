@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-02",
+  "softwareRevision": "hybrid-location-v3.3-setup",
+  "projectVersion": "3.3-setup-access",
+  "elfSha256Prefix": "a4c520f2d",
+  "flashWriteCompleted": true,
+  "captureSeconds": 40,
+  "bootBannerCount": 1,
+  "crashObserved": false,
+  "sampleCount": 79,
+  "lastSampleUptimeMs": 39219,
+  "i2cErrorObserved": false,
+  "cnnModelLoaded": true,
+  "setupHotspotStarted": true,
+  "setupAccessOnBoardVerified": false,
+  "homeWifiVerified": false,
+  "awsDeviceSyncVerified": false,
+  "memoryDiagnostics": [
+    "I (913) memory: before Wi-Fi: internal free 201803, largest 147456; PSRAM free 8377120",
+    "I (1013) memory: after radio start: internal free 162207, largest 126976",
+    "I (1023) memory: all workers started: internal free 55027, largest 31744; PSRAM free 8045416",
+    "I (30903) memory: running: internal free 60791, largest 31744; PSRAM free 6652544; main stack spare 7016"
+  ],
+  "lastBmeReading": {
+    "temperatureC": 38.27,
+    "relativeHumidityPercent": 41.0,
+    "pressureHpa": 1008.0
+  },
+  "state": "WARMING",
+  "limitations": [
+    "40-second startup capture only.",
+    "The open browser status tab still displays cached version 3.2 data; setup=true and form access require a fresh 3.3 response.",
+    "Home Wi-Fi, AWS device sync, messaging, powered MQ response and sustained concurrent inference/TLS remain unverified."
+  ]
+}

@@ -1,0 +1,36 @@
+# Build products and dependencies
+build/
+**/build*/
+sdkconfig
+sdkconfig.old
+managed_components/
+.local-components/
+__pycache__/
+*.py[cod]
+.DS_Store
+# Credentials, live deployment state and local records
+.env
+.env.*
+!.env.example
+.aws/
+provisioning.json
+**/provisioning.json
+cloud/deployment.json
+cloud/deployment-verification.json
+*-device-setup.txt
+*.pem
+*.key
+*.log
+work/
+private/
+# Datasets and recorded household media
+training/datasets/
+training/runs/
+training/export/
+training/field_data/
+training/field_to_label/
+# Private debug builds
+*.bin
+*.elf
+*.map
+*.zip

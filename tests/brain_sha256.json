@@ -1,0 +1,9 @@
+{
+  "mq.h": "4510152df7a9c7b55f1bf97b376e38f889a0e6b4810e12c43aebc363a969a8aa",
+  "sensor_features.h": "ab964b542adb8e226bc62fad8fc99efb867f1de13110d6e98164e63057647b76",
+  "model_a.h": "ec6aba693973d4497cf32c0812c01c84cc72467479fc13f53957f0ada2d1c69c",
+  "physics_thresholds.h": "bbc7325f3a198a9533da64368abde4a1d8e4e2e2f7f74c588a9f2a4579d51b5a",
+  "crossval.h": "82d3acfc2790c9587c5280778b65f6508aa2d943ca2d2e901d09b86024bb720d",
+  "fusion.h": "c5eb95d8623c4b054ab9223ed8d09da0414fcf51f18a9e8dab39cf4de2c112e4",
+  "adapt.h": "56546a6c4bcc2837f5dc5d5cfb3a504fa8e7339bafdcac010d4a0dce2bd361d2"
+}

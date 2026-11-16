@@ -1,0 +1,10 @@
+# Steps 4-5: ONNX export and int8 quantization with Espressif's ESP-PPQ.
+# ESP-PPQ needs Python 3.8 - 3.12 (it refuses 3.13), so these run in their own Python 3.12
+# environment. The Colab notebook sets that up for you with "uv".
+ultralytics==8.4.160
+torch
+torchvision
+onnx==1.17.0
+# (onnxsim comes with esp-ppq as "onnxsim-prebuilt"; installing plain onnxsim as well breaks it)
+onnxruntime>=1.19
+esp-ppq @ git+https://github.com/espressif/esp-ppq

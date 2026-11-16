@@ -1,0 +1,10 @@
+# Name,   Type, SubType, Offset,    Size
+nvs,      data, nvs,     0x9000,    24K,
+phy_init, data, phy,     0xf000,    4K,
+factory,  app,  factory, 0x10000,   0x480000,
+# Field samples (photos + your right/wrong verdicts) when there is no SD card: about 200 photos.
+# Get them with Wi-Fi sync (B2 on the READY screen) or pull_field_data.py --port COMx.
+storage,  data, fat,     0x490000,  0x370000,
+
+# Separate settings capacity; existing NVS, application and sample offsets stay fixed.
+fg_config, data, nvs,    0x800000,  64K,

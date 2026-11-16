@@ -1,0 +1,19 @@
+# Fire / smoke dataset in YOLO format.
+#
+# Folder layout (put it next to this project, or change "path"):
+#   datasets/fire/images/train/*.jpg     datasets/fire/labels/train/*.txt
+#   datasets/fire/images/val/*.jpg       datasets/fire/labels/val/*.txt
+#
+# Each .txt label line:  <class> <x_center> <y_center> <width> <height>   (all 0-1)
+# Roboflow Universe fire/smoke datasets export in exactly this format ("YOLOv11" export).
+#
+# If your dataset uses different class numbers (e.g. 0 = smoke, 1 = fire), change the names
+# below to match it. To detect only fire, keep just "0: fire" and drop smoke labels.
+
+path: datasets/fire # relative to this project folder, or an absolute path
+train: images/train
+val: images/val
+
+names:
+  0: fire
+  1: smoke

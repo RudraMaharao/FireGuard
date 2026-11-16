@@ -1,0 +1,13 @@
+# Start here - current two-sensor build
+
+1. Wire only the circuit in `FireGuard-updated-circuit.pdf` / `.png`. Reuse your tested MQ-2 and MQ-135 dividers; remove the MQ-7 branch, converter and relay. Use CIRCUIT.md for exact pins and quantities.
+2. Use a rated two-pin 5 V active buzzer (maximum 20 mA). The previously photographed buzzer has no confirmed rating. PN2222A B/C/E in the schematic are electrical terminals; check actual lead order.
+3. Disconnect charger and external 5 V board feed, then connect the board to the computer. Flash the binaries in `release/` using its README. These binaries include ADS1115, the two-sensor path and textbee support. No hardware has been flashed here.
+4. Read the setup hotspot password in the USB serial console. Hold B2 for 5 s, join FireGuard-Setup, open http://192.168.4.1. Set home Wi-Fi, Telegram bot and residents; use test contacts first. Residents join the bot with `/join PIN`.
+5. In setup step 05, use the deployment URL from `cloud/deployment.json` and your private device connection key. The dashboard access key is different. Existing settings survive a normal flash. Use the private setup file already supplied separately; no credentials are embedded in this public source ZIP.
+6. Disconnect PCUSB before powering the completed circuit from the tested USB-C breakout. After boot, check ADS1115/MQ validity and BME readings in Device health. Warm-up is 5 minutes; new MQ sensors need longer conditioning. Start in known clean air. No dedicated CO measurement is available.
+7. B2 tap sends AO voltages, sensor status, temperature/humidity/pressure and relative scores on Telegram. Test the camera using ordinary safe scene changes and the fault procedures in TESTING.md. Do not expose the prototype to a real fire or deliberately release gas.
+8. textbee: optional Android + SIM gateway; enter its key locally in step 06. AWS SNS: optional paid provider enabled at deployment. Both start off; see SMS_SETUP.md / AWS_SMS_SETUP.md. Configure one route first to avoid duplicate SMS. No SMS has been sent by the agent.
+9. Emergency photos: enable only after your Telegram test recipient joins with `/emergency PIN`. Test mode remains on for initial checks. Default unattended warning interval is 60 s; fresh high-confidence fire evidence can trigger sooner. Phone reference fields do not send images by phone number or place calls.
+
+Hybrid-location update: no new wiring. Save/verify fixed coordinates; optional Google Wi-Fi fallback and station-number SMS are configured on the local setup page. See LOCATION_SETUP.md (in docs/) for keys, defaults, freshness rules and station/test-number delivery. Current release binaries include these features.

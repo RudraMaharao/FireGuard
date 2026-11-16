@@ -1,0 +1,18 @@
+{
+  "version": "3.5-settings-storage",
+  "verifiedOn": "2026-11-02",
+  "flashWriteCompleted": true,
+  "onBoardBootVerified": false,
+  "bootErrorObserved": true,
+  "bootCount": 37,
+  "captureSeconds": 40,
+  "elfPrefix": "de3b0896e",
+  "failure": "panic_abort -> libc lock_init_generic -> timekeeping -> gettimeofday -> time -> sensors logRow first tick",
+  "partitionObserved": {
+    "fg_config": {
+      "offset": "0x800000",
+      "size": 65536
+    }
+  },
+  "scope": "Upload and new partition observed; repeated resets prevent healthy-boot or persistence confirmation. No raw credentials included."
+}

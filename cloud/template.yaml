@@ -1,0 +1,120 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: FireGuard live dashboard, private latest camera image, and device command bridge
+Parameters:
+  CodeBucket: {Type: String}
+  CodeKey: {Type: String}
+  AdminTokenHash: {Type: String, NoEcho: true}
+  DeviceTokenHash: {Type: String, NoEcho: true}
+  SmsEnabled:
+    Type: String
+    Default: 'false'
+    AllowedValues: ['true', 'false']
+    Description: Send FIRE/GAS and all-clear SMS to resident phone numbers through Amazon SNS
+  SmsEntityId:
+    Type: String
+    Default: ''
+    Description: Optional registered India DLT Entity ID for a correctly configured local route
+  SmsTemplateId:
+    Type: String
+    Default: ''
+    Description: Optional registered India DLT Template ID matching the approved message
+Conditions:
+  SmsOn: !Equals [!Ref SmsEnabled, 'true']
+Resources:
+  DeviceState:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions: [{AttributeName: id, AttributeType: S}]
+      KeySchema: [{AttributeName: id, KeyType: HASH}]
+      SSESpecification: {SSEEnabled: true}
+  Images:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      BucketEncryption:
+        ServerSideEncryptionConfiguration: [{ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}}]
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement: [{Effect: Allow, Principal: {Service: lambda.amazonaws.com}, Action: 'sts:AssumeRole'}]
+      Policies:
+        - PolicyName: FireGuardResources
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: ['dynamodb:GetItem', 'dynamodb:UpdateItem']
+                Resource: !GetAtt DeviceState.Arn
+              - Effect: Allow
+                Action: ['s3:GetObject', 's3:PutObject']
+                Resource: !Sub '${Images.Arn}/*'
+              - Effect: Allow
+                Action: ['logs:CreateLogStream', 'logs:PutLogEvents']
+                Resource: !GetAtt Logs.Arn
+  SmsPolicy:
+    Type: AWS::IAM::Policy
+    Condition: SmsOn
+    Properties:
+      PolicyName: FireGuardSms
+      Roles: [!Ref Role]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          # Direct-to-phone SMS publishes have no resource ARN, so SNS requires '*'.
+          # The code only publishes to resident numbers synced from the device settings.
+          - Effect: Allow
+            Action: 'sns:Publish'
+            Resource: '*'
+  App:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-app'
+      Runtime: python3.12
+      Handler: app.handler
+      Role: !GetAtt Role.Arn
+      Timeout: 15
+      MemorySize: 256
+      Code: {S3Bucket: !Ref CodeBucket, S3Key: !Ref CodeKey}
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref DeviceState
+          BUCKET_NAME: !Ref Images
+          ADMIN_TOKEN_HASH: !Ref AdminTokenHash
+          DEVICE_TOKEN_HASH: !Ref DeviceTokenHash
+          SMS_ENABLED: !Ref SmsEnabled
+          SMS_ENTITY_ID: !Ref SmsEntityId
+          SMS_TEMPLATE_ID: !Ref SmsTemplateId
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-app'
+      RetentionInDays: 7
+  FunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !Ref App
+      AuthType: NONE
+  UrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunctionUrl
+      FunctionName: !Ref App
+      Principal: '*'
+      FunctionUrlAuthType: NONE
+  InvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref App
+      Principal: '*'
+      InvokedViaFunctionUrl: true
+Outputs:
+  DashboardUrl: {Value: !GetAtt FunctionUrl.FunctionUrl}
+  ImagesBucket: {Value: !Ref Images}
+  StateTable: {Value: !Ref DeviceState}
+  FunctionName: {Value: !Ref App}
